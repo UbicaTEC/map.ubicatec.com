@@ -11,7 +11,9 @@
 export function extractCode(tags) {
   const direct = tags.ref ?? tags["building:ref"] ?? tags.short_name;
   if (direct?.trim()) return direct.trim();
-  const m = /\(([A-ZÁÉÍÓÚÑ0-9][A-ZÁÉÍÓÚÑ0-9 .&-]{1,15})\)\s*$/.exec(tags.name ?? "");
+  const m = /\(([A-ZÁÉÍÓÚÑ0-9][A-ZÁÉÍÓÚÑ0-9 .&-]{1,15})\)\s*$/.exec(
+    tags.name ?? "",
+  );
   return m ? m[1].trim() : null;
 }
 
@@ -33,9 +35,11 @@ export function stitchRings(segments) {
       for (let i = 0; i < pending.length; i++) {
         const seg = pending[i];
         if (same(ring.at(-1), seg[0])) ring = ring.concat(seg.slice(1));
-        else if (same(ring.at(-1), seg.at(-1))) ring = ring.concat([...seg].reverse().slice(1));
+        else if (same(ring.at(-1), seg.at(-1)))
+          ring = ring.concat([...seg].reverse().slice(1));
         else if (same(ring[0], seg.at(-1))) ring = seg.concat(ring.slice(1));
-        else if (same(ring[0], seg[0])) ring = [...seg].reverse().concat(ring.slice(1));
+        else if (same(ring[0], seg[0]))
+          ring = [...seg].reverse().concat(ring.slice(1));
         else continue;
         pending.splice(i, 1);
         grew = true;
@@ -64,12 +68,15 @@ export function elementToGeometry(el) {
   if (el.type === "relation") {
     const ways = (role) =>
       (el.members ?? [])
-        .filter((m) => m.type === "way" && m.geometry && (m.role || "outer") === role)
+        .filter(
+          (m) => m.type === "way" && m.geometry && (m.role || "outer") === role,
+        )
         .map((m) => m.geometry.map(toCoord));
     const outers = stitchRings(ways("outer"));
     const inners = stitchRings(ways("inner"));
     if (!outers.length) return null;
-    if (outers.length === 1) return { type: "Polygon", coordinates: [outers[0], ...inners] };
+    if (outers.length === 1)
+      return { type: "Polygon", coordinates: [outers[0], ...inners] };
     return { type: "MultiPolygon", coordinates: outers.map((o) => [o]) };
   }
   return null;
@@ -82,9 +89,15 @@ export function elementToGeometry(el) {
  * @returns {[number, number]}
  */
 export function centroid(geometry) {
-  const ring = geometry.type === "Polygon" ? geometry.coordinates[0] : geometry.coordinates[0][0];
+  const ring =
+    geometry.type === "Polygon"
+      ? geometry.coordinates[0]
+      : geometry.coordinates[0][0];
   const pts = ring.slice(0, -1);
-  const [x, y] = pts.reduce(([sx, sy], [lon, lat]) => [sx + lon, sy + lat], [0, 0]);
+  const [x, y] = pts.reduce(
+    ([sx, sy], [lon, lat]) => [sx + lon, sy + lat],
+    [0, 0],
+  );
   return [round(x / pts.length), round(y / pts.length)];
 }
 
@@ -103,7 +116,8 @@ export function distanceToPolygon(pt, geometry) {
   const kx = 111_320 * Math.cos((pt[1] * Math.PI) / 180);
   const ky = 110_540;
   const xy = ([lon, lat]) => [(lon - pt[0]) * kx, (lat - pt[1]) * ky]; // point at origin
-  const polys = geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
+  const polys =
+    geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
   let best = Infinity;
   for (const poly of polys) {
     const ring = poly[0].map(xy);
@@ -111,12 +125,15 @@ export function distanceToPolygon(pt, geometry) {
     for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
       const [xi, yi] = ring[i];
       const [xj, yj] = ring[j];
-      if (yi > 0 !== yj > 0 && 0 < ((xj - xi) * (0 - yi)) / (yj - yi) + xi) inside = !inside;
+      if (yi > 0 !== yj > 0 && 0 < ((xj - xi) * (0 - yi)) / (yj - yi) + xi)
+        inside = !inside;
       // distance from origin to segment (i, j)
       const dx = xj - xi;
       const dy = yj - yi;
       const len2 = dx * dx + dy * dy;
-      const t = len2 ? Math.max(0, Math.min(1, -(xi * dx + yi * dy) / len2)) : 0;
+      const t = len2
+        ? Math.max(0, Math.min(1, -(xi * dx + yi * dy) / len2))
+        : 0;
       best = Math.min(best, Math.hypot(xi + t * dx, yi + t * dy));
     }
     if (inside) return 0;
@@ -129,9 +146,13 @@ export function distanceToPolygon(pt, geometry) {
  * @param {any[]} elements  buildings (ways/relations with geom) + entrance/gate nodes
  */
 export function buildDatasets(elements) {
-  const buildingEls = elements.filter((e) => (e.type === "way" || e.type === "relation") && e.tags?.building);
+  const buildingEls = elements.filter(
+    (e) => (e.type === "way" || e.type === "relation") && e.tags?.building,
+  );
   const entranceNodes = elements.filter(
-    (e) => e.type === "node" && (e.tags?.entrance || GATE_BARRIERS.has(e.tags?.barrier)),
+    (e) =>
+      e.type === "node" &&
+      (e.tags?.entrance || GATE_BARRIERS.has(e.tags?.barrier)),
   );
 
   // node id → building id, so each entrance knows which building it belongs to.
@@ -141,7 +162,7 @@ export function buildDatasets(elements) {
     const geometry = elementToGeometry(el);
     if (!geometry) continue;
     const id = `${el.type}/${el.id}`;
-    const nodeIds = el.type === "way" ? el.nodes ?? [] : [];
+    const nodeIds = el.type === "way" ? (el.nodes ?? []) : [];
     // Relation members come back without node ids under `out geom`; those entrances
     // are matched by coordinate below.
     for (const n of nodeIds) owner.set(n, id);
@@ -152,7 +173,9 @@ export function buildDatasets(elements) {
       name: el.tags.name ?? null,
       code: extractCode(el.tags),
       building: el.tags.building,
-      levels: el.tags["building:levels"] ? Number(el.tags["building:levels"]) : null,
+      levels: el.tags["building:levels"]
+        ? Number(el.tags["building:levels"])
+        : null,
       center: centroid(geometry),
       geometry,
     });
@@ -162,15 +185,20 @@ export function buildDatasets(elements) {
   const coordOwner = new Map();
   for (const b of buildings) {
     if (b.osmType !== "relation") continue;
-    const rings = b.geometry.type === "Polygon" ? b.geometry.coordinates : b.geometry.coordinates.flat();
-    for (const ring of rings) for (const c of ring) coordOwner.set(c.join(","), b.id);
+    const rings =
+      b.geometry.type === "Polygon"
+        ? b.geometry.coordinates
+        : b.geometry.coordinates.flat();
+    for (const ring of rings)
+      for (const c of ring) coordOwner.set(c.join(","), b.id);
   }
 
   const nearestBuilding = (coord) => {
     let best = null;
     for (const b of buildings) {
       const d = distanceToPolygon(coord, b.geometry);
-      if (d <= ENTRANCE_SNAP_METERS && (!best || d < best.d)) best = { id: b.id, d };
+      if (d <= ENTRANCE_SNAP_METERS && (!best || d < best.d))
+        best = { id: b.id, d };
     }
     return best?.id ?? null;
   };
@@ -200,6 +228,9 @@ export function buildDatasets(elements) {
     })
     .sort((a, b) => a.osmId - b.osmId);
 
-  buildings.sort((a, b) => (a.name ?? "￿").localeCompare(b.name ?? "￿", "es") || a.osmId - b.osmId);
+  buildings.sort(
+    (a, b) =>
+      (a.name ?? "￿").localeCompare(b.name ?? "￿", "es") || a.osmId - b.osmId,
+  );
   return { buildings, entrances };
 }

@@ -27,7 +27,10 @@ const ENDPOINTS = (
   "https://overpass-api.de/api/interpreter,https://overpass.private.coffee/api/interpreter"
 ).split(",");
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+const root = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../..",
+);
 const outDir = path.join(root, "data");
 
 const query = `
@@ -68,14 +71,18 @@ async function overpass(q) {
     } catch (err) {
       lastErr = err;
       const wait = 5_000 * (attempt + 1);
-      console.warn(`  Overpass ${url} falló (${err.message}). Reintento en ${wait / 1000}s…`);
+      console.warn(
+        `  Overpass ${url} falló (${err.message}). Reintento en ${wait / 1000}s…`,
+      );
       await new Promise((r) => setTimeout(r, wait));
     }
   }
   throw lastErr;
 }
 
-console.log(`Consultando Overpass (relación ${CAMPUS_RELATION}, centro ${CENTER.lat}, ${CENTER.lon})…`);
+console.log(
+  `Consultando Overpass (relación ${CAMPUS_RELATION}, centro ${CENTER.lat}, ${CENTER.lon})…`,
+);
 const json = await overpass(query);
 
 // Defensive dedupe by type/id (a node shared by two buildings is only output once anyway).
@@ -88,7 +95,10 @@ const elements = json.elements.filter((e) => {
 });
 
 const { buildings, entrances } = buildDatasets(elements);
-if (!buildings.length) throw new Error("Overpass no devolvió edificios; revisa la relación del campus.");
+if (!buildings.length)
+  throw new Error(
+    "Overpass no devolvió edificios; revisa la relación del campus.",
+  );
 
 const meta = {
   source: "OpenStreetMap contributors (ODbL) via Overpass API",
@@ -100,14 +110,20 @@ const meta = {
 
 mkdirSync(outDir, { recursive: true });
 const write = (file, key, items) =>
-  writeFileSync(path.join(outDir, file), JSON.stringify({ ...meta, count: items.length, [key]: items }, null, 2) + "\n");
+  writeFileSync(
+    path.join(outDir, file),
+    JSON.stringify({ ...meta, count: items.length, [key]: items }, null, 2) +
+      "\n",
+  );
 write("buildings.json", "buildings", buildings);
 write("entrances.json", "entrances", entrances);
 
 const named = buildings.filter((b) => b.name).length;
 const doors = entrances.filter((e) => e.kind === "building");
 const linked = doors.filter((e) => e.buildingId).length;
-console.log(`✔ data/buildings.json  ${buildings.length} edificios (${named} con nombre)`);
+console.log(
+  `✔ data/buildings.json  ${buildings.length} edificios (${named} con nombre)`,
+);
 console.log(
   `✔ data/entrances.json  ${entrances.length} entradas: ${doors.length} de edificio (${linked} ligadas), ` +
     `${entrances.length - doors.length} accesos del campus`,
