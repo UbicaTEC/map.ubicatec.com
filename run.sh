@@ -13,8 +13,15 @@ PORT=5433 # not 5432, to avoid clashing with a local Postgres
 URL="postgresql://postgres:postgres@localhost:$PORT/ubicatec"
 
 case "${1:-}" in
-  stop)  docker stop "$NAME"; exit ;;
-  reset) docker rm -f "$NAME" 2>/dev/null || true; docker volume rm "$VOLUME"; exit ;;
+  stop)
+    docker stop "$NAME" 2>/dev/null || true
+    exit 0
+    ;;
+  reset)
+    docker rm -f "$NAME" 2>/dev/null || true
+    docker volume rm "$VOLUME" 2>/dev/null || true
+    exit 0
+    ;;
 esac
 
 FRESH=0
