@@ -31,9 +31,9 @@ until docker exec "$NAME" pg_isready -U postgres -d ubicatec >/dev/null 2>&1; do
 # Point the app at the container (npm run dev reads .env).
 touch .env
 if grep -q '^DATABASE_URL=' .env; then
-  sed -i "s|^DATABASE_URL=.*|DATABASE_URL=\"$URL\"|" .env
+  URL="$URL" perl -i -pe 's/^DATABASE_URL=.*/DATABASE_URL="$ENV{URL}"/' .env
 else
-  echo "DATABASE_URL=\"$URL\"" >> .env
+  printf 'DATABASE_URL="%s"\n' "$URL" >> .env
 fi
 export DATABASE_URL="$URL"
 
