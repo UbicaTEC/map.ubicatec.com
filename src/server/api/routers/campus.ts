@@ -211,7 +211,10 @@ export const campusRouter = createTRPCRouter({
           orderBy: { order: "asc" },
         }),
         ctx.db.entrance.findMany(),
-        ctx.db.event.findMany({ orderBy: { startsAt: "asc" } }),
+        ctx.db.event.findMany({
+          include: { organization: true },
+          orderBy: { startsAt: "asc" },
+        }),
         ctx.db.post.findMany({ orderBy: { publishedAt: "desc" } }),
         ctx.db.foodZone.findMany({ orderBy: { order: "asc" } }),
         ctx.db.foodPlace.findMany(),
@@ -245,14 +248,16 @@ export const campusRouter = createTRPCRouter({
       events: events.map<EventDto>((e) => ({
         slug: e.slug,
         title: e.title,
-        description: e.description,
-        startsAt: e.startsAt,
-        endsAt: e.endsAt,
-        durationMin: e.durationMin,
-        organizer: e.organizer,
+        description: e.descriptionMd,
+        startsAt: e.startsAt.toISOString(),
+        endsAt: e.endsAt ? e.endsAt.toISOString() : null,
+        durationMin: e.endsAt
+          ? Math.round((e.endsAt.getTime() - e.startsAt.getTime()) / 60000)
+          : 0,
+        organizer: e.organization.name,
         place: e.place,
-        tags: parseJson<string[]>(e.tags, []),
-        buildingSlug: e.buildingSlug,
+        tags: [e.category],
+        buildingSlug: e.buildingId,
         buildingId: e.buildingId,
       })),
       posts: posts.map<PostDto>((p) => ({

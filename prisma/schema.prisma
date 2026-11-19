@@ -79,21 +79,113 @@ model Entrance {
 }
 
 model Event {
-  slug          String    @id
-  title         String
-  description   String
-  /// ISO-8601 with offset, exactly as authored in the source
-  startsAt      String
-  endsAt        String?
-  durationMin   Int
-  organizer     String?
-  place         String?
-  /// JSON array of strings
-  tags          String    @default("[]")
-  /// Slug as authored ("cetec"), before alias resolution
-  buildingSlug  String?
-  buildingId    String?
-  building      Building? @relation(fields: [buildingId], references: [id])
+  id             String       @id @default(cuid())
+  slug           String       @unique
+  title          String
+  /// Markdown. Sanitize when rendering, never trust it as HTML.
+  descriptionMd  String
+  startsAt       DateTime
+  endsAt         DateTime?
+  /// Free text for the room or extra detail ("Aula 3, piso 2").
+  place          String?
+  /// One of the values in src/lib/categories.ts, validated with zod.
+  category       String
+  featured       Boolean      @default(false)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  buildingId     String?
+  building       Building?    @relation(fields: [buildingId], references: [id])
+  createdById    String
+  createdBy      User         @relation("EventCreatedBy", fields: [createdById], references: [id])
+  updatedById    String
+  updatedBy      User         @relation("EventUpdatedBy", fields: [updatedById], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([startsAt])
+  @@index([organizationId])
+  @@index([featured, startsAt])
+}
+
+/// A student group that publishes events.
+model Organization {
+  id          String       @id @default(cuid())
+  name        String
+  slug        String       @unique
+  description String?
+  createdAt   DateTime     @default(now())
+  memberships Membership[]
+  events      Event[]
+}
+
+enum MembershipRole {
+  OWNER
+  EDITOR
+}
+
+/// Who can publish events for an organization.
+model Membership {
+  userId         String
+  organizationId String
+  role           MembershipRole @default(EDITOR)
+  createdAt      DateTime       @default(now())
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@id([userId, organizationId])
+  @@index([organizationId])
+}
+
+model User {
+  id            String       @id @default(cuid())
+  name          String?
+  email         String?      @unique
+  emailVerified DateTime?
+  image         String?
+  /// Platform admin: can create organizations and assign owners.
+  isAdmin       Boolean      @default(false)
+  createdAt     DateTime     @default(now())
+  accounts      Account[]
+  sessions      Session[]
+  memberships   Membership[]
+  eventsCreated Event[]      @relation("EventCreatedBy")
+  eventsUpdated Event[]      @relation("EventUpdatedBy")
+}
+
+/// Auth.js tables (Prisma adapter).
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String? @db.Text
+  access_token             String? @db.Text
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String? @db.Text
+  session_state            String?
+  refresh_token_expires_in Int?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 model Post {
