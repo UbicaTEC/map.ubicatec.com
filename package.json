@@ -17,9 +17,11 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "osm:fetch": "node scripts/osm/fetch-osm.mjs",
     "preview": "next build && next start",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"scripts/**/*.test.mjs\""
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",

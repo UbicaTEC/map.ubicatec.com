@@ -1,0 +1,637 @@
+{
+  "source": "OpenStreetMap contributors (ODbL) via Overpass API",
+  "osmTimestamp": "2026-11-16T18:37:03Z",
+  "campusRelation": 21104322,
+  "center": [
+    -100.2895,
+    25.6515
+  ],
+  "coordinateOrder": "[lon, lat] (GeoJSON)",
+  "count": 39,
+  "entrances": [
+    {
+      "id": "node/7515934315",
+      "osmId": 7515934315,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "lift_gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.3350465,
+        25.6479549
+      ]
+    },
+    {
+      "id": "node/8080485493",
+      "osmId": 8080485493,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.285819,
+        25.6512556
+      ]
+    },
+    {
+      "id": "node/8654508609",
+      "osmId": 8654508609,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2867204,
+        25.6539396
+      ]
+    },
+    {
+      "id": "node/9359491687",
+      "osmId": 9359491687,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2873129,
+        25.6500517
+      ]
+    },
+    {
+      "id": "node/9869154062",
+      "osmId": 9869154062,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": "permissive",
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2844867,
+        25.6525248
+      ]
+    },
+    {
+      "id": "node/13477068359",
+      "osmId": 13477068359,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2903084,
+        25.6532837
+      ]
+    },
+    {
+      "id": "node/14018264110",
+      "osmId": 14018264110,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "turnstile",
+      "access": "private",
+      "name": null,
+      "ref": null,
+      "wheelchair": "yes",
+      "coordinates": [
+        -100.291885,
+        25.6524586
+      ]
+    },
+    {
+      "id": "node/14018264175",
+      "osmId": 14018264175,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2922694,
+        25.6543809
+      ]
+    },
+    {
+      "id": "node/14018264184",
+      "osmId": 14018264184,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.292041,
+        25.654591
+      ]
+    },
+    {
+      "id": "node/14018675019",
+      "osmId": 14018675019,
+      "kind": "building",
+      "buildingId": "relation/21104884",
+      "entrance": "yes",
+      "barrier": null,
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2866739,
+        25.6516238
+      ]
+    },
+    {
+      "id": "node/14018675027",
+      "osmId": 14018675027,
+      "kind": "building",
+      "buildingId": null,
+      "entrance": "main",
+      "barrier": null,
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2872747,
+        25.651648
+      ]
+    },
+    {
+      "id": "node/14018675029",
+      "osmId": 14018675029,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "lift_gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2867638,
+        25.6511003
+      ]
+    },
+    {
+      "id": "node/14018675032",
+      "osmId": 14018675032,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "lift_gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2867964,
+        25.651129
+      ]
+    },
+    {
+      "id": "node/14020593393",
+      "osmId": 14020593393,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2851602,
+        25.6553514
+      ]
+    },
+    {
+      "id": "node/14020624821",
+      "osmId": 14020624821,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2842135,
+        25.6552532
+      ]
+    },
+    {
+      "id": "node/14020624822",
+      "osmId": 14020624822,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2842129,
+        25.6556455
+      ]
+    },
+    {
+      "id": "node/14020624976",
+      "osmId": 14020624976,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2843226,
+        25.6533109
+      ]
+    },
+    {
+      "id": "node/14020624977",
+      "osmId": 14020624977,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2842219,
+        25.6549708
+      ]
+    },
+    {
+      "id": "node/14020625063",
+      "osmId": 14020625063,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2879186,
+        25.6527213
+      ]
+    },
+    {
+      "id": "node/14039895752",
+      "osmId": 14039895752,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2855658,
+        25.6511444
+      ]
+    },
+    {
+      "id": "node/14039895889",
+      "osmId": 14039895889,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2865556,
+        25.650369
+      ]
+    },
+    {
+      "id": "node/14039968587",
+      "osmId": 14039968587,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.335709,
+        25.6478921
+      ]
+    },
+    {
+      "id": "node/14039968590",
+      "osmId": 14039968590,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.3328131,
+        25.646301
+      ]
+    },
+    {
+      "id": "node/14039968598",
+      "osmId": 14039968598,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.3337183,
+        25.6476775
+      ]
+    },
+    {
+      "id": "node/14039968599",
+      "osmId": 14039968599,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.3329558,
+        25.6467795
+      ]
+    },
+    {
+      "id": "node/14042122491",
+      "osmId": 14042122491,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2943552,
+        25.6509736
+      ]
+    },
+    {
+      "id": "node/14042349955",
+      "osmId": 14042349955,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "turnstile",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2864318,
+        25.6554735
+      ]
+    },
+    {
+      "id": "node/14042435076",
+      "osmId": 14042435076,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "turnstile",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2891875,
+        25.6487301
+      ]
+    },
+    {
+      "id": "node/14042435090",
+      "osmId": 14042435090,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "turnstile",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2905367,
+        25.6489987
+      ]
+    },
+    {
+      "id": "node/14046208999",
+      "osmId": 14046208999,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "lift_gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2915046,
+        25.6506645
+      ]
+    },
+    {
+      "id": "node/14046209000",
+      "osmId": 14046209000,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "lift_gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2915636,
+        25.6506639
+      ]
+    },
+    {
+      "id": "node/14046281133",
+      "osmId": 14046281133,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "turnstile",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2873156,
+        25.6512139
+      ]
+    },
+    {
+      "id": "node/14047366254",
+      "osmId": 14047366254,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "turnstile",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2888351,
+        25.652436
+      ]
+    },
+    {
+      "id": "node/14047396360",
+      "osmId": 14047396360,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "turnstile",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2900656,
+        25.6531325
+      ]
+    },
+    {
+      "id": "node/14047396396",
+      "osmId": 14047396396,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2881153,
+        25.6519881
+      ]
+    },
+    {
+      "id": "node/14047396398",
+      "osmId": 14047396398,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "turnstile",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2910808,
+        25.6521769
+      ]
+    },
+    {
+      "id": "node/14049444421",
+      "osmId": 14049444421,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2845743,
+        25.655318
+      ]
+    },
+    {
+      "id": "node/14056691340",
+      "osmId": 14056691340,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.2900857,
+        25.6537744
+      ]
+    },
+    {
+      "id": "node/14056691345",
+      "osmId": 14056691345,
+      "kind": "campus",
+      "buildingId": null,
+      "entrance": null,
+      "barrier": "gate",
+      "access": null,
+      "name": null,
+      "ref": null,
+      "wheelchair": null,
+      "coordinates": [
+        -100.290088,
+        25.6534532
+      ]
+    }
+  ]
+}
